@@ -1,0 +1,5 @@
+MYSQL_DB_HOST=db
+MYSQL_ROOT_PASSWORD=example
+MYSQL_DATABASE=ss_example
+MYSQL_USER=example_user
+MYSQL_PASSWORD=example

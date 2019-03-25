@@ -2,19 +2,29 @@ version: '3'
 
 services:
   db:
-    image: mysql:8.0
+    image: mysql:5.7
     networks:
       - ss_example
+    env_file:
+      - .envs/.mysql
+    volumes:
+      - "db_data:/var/lib/mysql"
   web_app:
     build:
       context: .
       dockerfile: ./compose/web_app/Dockerfile
+    env_file:
+      - ./.envs/.mysql
     volumes:
-      - "./src:/var/www/html/"
-    # depends:
-    #   - db
+      - /var/www/html/vendor/
+      - "./src/example/:/var/www/html/"
+    depends_on:
+      - db
+    networks: 
+      - ss_example
     ports:
       - "8080:80"
-# volumes:
+volumes:
+  db_data: {}
 networks: 
   ss_example: {}
