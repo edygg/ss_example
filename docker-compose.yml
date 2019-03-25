@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8.0
+    networks:
+      - ss_example
+  web_app:
+    build:
+      context: .
+      dockerfile: ./compose/web_app/Dockerfile
+    volumes:
+      - "./src:/var/www/html/"
+    # depends:
+    #   - db
+    ports:
+      - "8080:80"
+# volumes:
+networks: 
+  ss_example: {}
